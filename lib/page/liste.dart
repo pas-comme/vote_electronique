@@ -13,7 +13,7 @@ class Liste extends StatefulWidget{
 class _ListeScreen extends State<Liste>{
   List<Element> liste = [];
 
-
+//méthode récupérant la liste des éléctions activées
   Future<List<Element>> getLIST()async{
     //var reponse = await http.get(Uri.parse("http://localhost/API/polling/pollings.php?voting=1" ));
     var reponse = await http.get(Uri.parse("http://10.42.0.1/API/polling/pollings.php?voting=1" ));
@@ -70,6 +70,7 @@ class _ListeScreen extends State<Liste>{
     );
   }
 }
+// classe servant de structure de données pour les élections
 class Element {
   int? id;
   String? nom;
@@ -77,6 +78,7 @@ class Element {
   String? description;
   Element({this.id,  this.domaine,  this.nom, this.description});
 
+  // méthode de convertion de jsnon en dart
   Element.fromJson(dynamic json){
     id =  json['id'];
     nom = json['nom'];

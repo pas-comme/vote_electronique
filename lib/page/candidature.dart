@@ -31,6 +31,7 @@ class CandidaturePage extends State<Candidature>{
     // TODO: implement setState
     super.setState(fn);
   }
+  // méthode permettant de voter
   void voter(String idCandidat) async{
     await FlutterBarcodeScanner.scanBarcode('#ff6666', 'Cancel', true, ScanMode.QR).then((value) => retour = value);
     if(retour!=""){
@@ -69,13 +70,16 @@ class CandidaturePage extends State<Candidature>{
             create: (context) => CandidatBloc(CandidatRepository(id))..add(GetALlCandidat(id)),
             child: BlocBuilder<CandidatBloc, CandidatState>(
                 builder: (context, state) {
-                  if(state is CandidatInitial){
-                    return const Center( child: CircularProgressIndicator());
+                  if(state is CandidatInitial){ // ce qui s'affiche pendant le chargement des données
+                    return Center( child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [Text("LOADING.......", style: TextStyle(fontSize: 48, fontWeight:FontWeight.bold ),),
+                          CircularProgressIndicator()]));
                   }
-                  else if(state is CandidatVideState){
+                  else if(state is CandidatVideState){ // ce qui s'affiche si les données sont vides
                     return const Center(child: Text("aucun candidat inscrit pour le moment"));
                   }
-                  else if(state is CandidatLoadedState){
+                  else if(state is CandidatLoadedState){ // ce qui s'affiche quand les données sont chargées
                     List<Personne> personneLIST = state.candidats;
                     return  ListView.builder(
                         itemCount: personneLIST.length,
@@ -93,7 +97,6 @@ class CandidaturePage extends State<Candidature>{
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     mainAxisSize: MainAxisSize.min,
                                     children : [ CircleAvatar(
-
                                         foregroundImage: MemoryImage( Uint8List.fromList(Personne.base64Decoder(personneLIST[index].image))),
                                         radius: avatarSize / 2 ,
                                     ),
@@ -118,11 +121,11 @@ class CandidaturePage extends State<Candidature>{
                           );
                         });
                   }
-                  else if(state is CandidatErrorState){
+                  else if(state is CandidatErrorState){ // ce qui s'affiche en cas d'erreur
                     return  Center(child: Text(state.erreur),);
                   }
-                  else{
-                    return const Center(child: Text("aucun candidat inscrit pour le moment"),);
+                  else{ // ce qui s'affiche dans les autres cas
+                    return const Center(child: Text("quelque chose ne marche pas..."),);
                   }
                 }
 

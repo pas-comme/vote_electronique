@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'Personne.dart';
 
+// classe permettant de récupérer les informations des candidats
 class CandidatRepository{
   int? id_election;
   CandidatRepository(this.id_election);
@@ -38,6 +39,7 @@ class CandidatRepository{
 
 }
 
+// classe servant de structure de données pour les électeurs
 class Candidat{
   int idPRS = 0;
   int? id_election;
