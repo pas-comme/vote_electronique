@@ -12,22 +12,20 @@ import '../bloc/candidat_bloc.dart';
 class Candidature extends StatefulWidget{
   int? id;
   String? nom_election;
-  bool voting;
 
-  Candidature(this.id, this.nom_election, this.voting,{Key? key}) : super(key: key);
+  Candidature(this.id, this.nom_election,{Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => CandidaturePage(id, nom_election, voting);
+  State<StatefulWidget> createState() => CandidaturePage(id, nom_election);
 }
 
 class CandidaturePage extends State<Candidature>{
   int? id;
   String? ids;
   String? nom_election;
-  bool voting;
   String retour = "";
 
-  CandidaturePage(this.id, this.nom_election, this.voting);
+  CandidaturePage(this.id, this.nom_election);
   @override
   void setState(VoidCallback fn) {
     // TODO: implement setState
@@ -95,7 +93,7 @@ class CandidaturePage extends State<Candidature>{
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     mainAxisSize: MainAxisSize.min,
                                     children : [ CircleAvatar(
-                                        //backgroundImage : MemoryImage( Uint8List.fromList(Personne.base64Decoder(personneLIST[index].image))),
+
                                         foregroundImage: MemoryImage( Uint8List.fromList(Personne.base64Decoder(personneLIST[index].image))),
                                         radius: avatarSize / 2 ,
                                     ),
@@ -106,17 +104,15 @@ class CandidaturePage extends State<Candidature>{
                                   subtitle: Text("AGE : ${personneLIST[index].daty}       SEXE : ${personneLIST[index].sexe.toString()} \n"
                                       "PROFESSION : ${personneLIST[index].asa}      ADRESSE : ${personneLIST[index].adiresy}      CONTACT : ${personneLIST[index].phone}",),
 
-                                trailing: voting ? ElevatedButton(
+                                trailing: ElevatedButton(
                                   style: ElevatedButton. styleFrom(
                                     primary: Colors.green,
                                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20),),
-                                    elevation: 5,
-
-                                  ),
-                                  onPressed: (){
+                                    elevation: 5,),
+                                    onPressed: (){
                                     voter(personneLIST[index].id.toString());},
                                   child: const Text("Voter"),
-                                ) : null,
+                                ),
                               ),
                             ),
                           );
