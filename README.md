@@ -8,5 +8,5 @@ tous les 2 suivant le parcours Ingéneurie des Radiocommunication
 Le projet est une application mobile de vote éléctronique à distance et il est associé à un autre projet qui une application de gestion numérique des élections à distance .
 
 À noter que l'application ne marche pas sans une connexion avec un serveur de base de données local (notre serveur local).
-Pour des informations supplémentaire ou pour tester l'application veuillez contacter le responsable via l'addresse : imahalimanana@gmail.com
+Pour des informations supplémentaire ou pour tester l'application veuillez contacter les responsables via l'addresse : imahalimanana@gmail.com
 ou via contact téléphonique : +261 34 64 112 15 (Pacôme) ou +261 34 98 911 02(Fandresena)
